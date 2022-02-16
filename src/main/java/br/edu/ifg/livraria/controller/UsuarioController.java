@@ -19,7 +19,7 @@ import br.edu.ifg.livraria.repositories.UsuarioRepository;
 import br.edu.ifg.livraria.domain.models.Usuario;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/usuarios")
 public class UsuarioController {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
