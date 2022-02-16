@@ -15,51 +15,50 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.ifg.livraria.domain.models.Livro;
-import br.edu.ifg.livraria.repositories.LivroRepository;
-
+import br.edu.ifg.livraria.repositories.UsuarioRepository;
+import br.edu.ifg.livraria.domain.models.Usuario;
 
 @RestController
-@RequestMapping("/livros")
-public class LivroController {
+@RequestMapping("/usuario")
+public class UsuarioController {
 	@Autowired
-	private LivroRepository livroRepository;
+	private UsuarioRepository usuarioRepository;
 	
 	@GetMapping
-	public List<Livro> list() {
-		return livroRepository.findAll();
+	public List<Usuario> list(){
+		return usuarioRepository.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	public Livro show(@PathVariable Long id) {
-		return livroRepository.findById(id).orElse(null);
+	public Usuario show(@PathVariable Long id) {
+		return usuarioRepository.findById(id).orElse(null);
 	}
 	
 	@PostMapping
-	public Livro create(@RequestBody Livro livro) {
-		return livroRepository.save(livro);
+	public Usuario create(@RequestBody Usuario usuario) {
+		return usuarioRepository.save(usuario);
 	}
+	
 	
 	@PutMapping("/{id}")
-	public Livro update(@PathVariable Long id, @RequestBody Livro livro) {
-		Livro findBook = livroRepository.findById(id).orElse(null);
+	public Usuario update(@PathVariable Long id, @RequestBody Usuario usuario) {
+		Usuario findUser = usuarioRepository.findById(id).orElse(null);
 		
-		if(findBook != null) {
-			BeanUtils.copyProperties(livro, findBook, "id");
-			return livroRepository.save(findBook);
+		if(findUser!=null) {
+			BeanUtils.copyProperties(usuario, findUser, "id");
+			return usuarioRepository.save(findUser);
 		}
-		return null;	
+		return null;
 	}
 	
+
 	@DeleteMapping("/{id}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
-		Livro findBook = livroRepository.findById(id).orElse(null);
+		Usuario findUser = usuarioRepository.findById(id).orElse(null);
 		
-		if(findBook != null) {
-			livroRepository.delete(findBook);
+		if(findUser!=null) {
+			usuarioRepository.delete(findUser);
 		}
-		
 	}
-	
 }
