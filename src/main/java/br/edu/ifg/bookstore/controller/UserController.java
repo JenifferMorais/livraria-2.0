@@ -1,4 +1,4 @@
-package br.edu.ifg.livraria.controller;
+package br.edu.ifg.bookstore.controller;
 
 import java.util.List;
 
@@ -15,34 +15,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.ifg.livraria.repositories.UsuarioRepository;
-import br.edu.ifg.livraria.domain.models.Usuario;
+import br.edu.ifg.bookstore.domain.models.User;
+import br.edu.ifg.bookstore.repositories.UserRepository;
 
 @RestController
 @RequestMapping("/usuarios")
-public class UsuarioController {
+public class UserController {
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private UserRepository usuarioRepository;
 	
 	@GetMapping
-	public List<Usuario> list(){
+	public List<User> list(){
 		return usuarioRepository.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	public Usuario show(@PathVariable Long id) {
+	public User show(@PathVariable Long id) {
 		return usuarioRepository.findById(id).orElse(null);
 	}
 	
 	@PostMapping
-	public Usuario create(@RequestBody Usuario usuario) {
+	public User create(@RequestBody User usuario) {
 		return usuarioRepository.save(usuario);
 	}
 	
 	
 	@PutMapping("/{id}")
-	public Usuario update(@PathVariable Long id, @RequestBody Usuario usuario) {
-		Usuario findUser = usuarioRepository.findById(id).orElse(null);
+	public User update(@PathVariable Long id, @RequestBody User usuario) {
+		User findUser = usuarioRepository.findById(id).orElse(null);
 		
 		if(findUser!=null) {
 			BeanUtils.copyProperties(usuario, findUser, "id");
@@ -55,7 +55,7 @@ public class UsuarioController {
 	@DeleteMapping("/{id}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
-		Usuario findUser = usuarioRepository.findById(id).orElse(null);
+		User findUser = usuarioRepository.findById(id).orElse(null);
 		
 		if(findUser!=null) {
 			usuarioRepository.delete(findUser);

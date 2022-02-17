@@ -1,14 +1,13 @@
-package br.edu.ifg.livraria.domain.models;
+package br.edu.ifg.bookstore.domain.models;
 
-import javax.persistence.Entity;
+
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
-@Entity
-public class ItemVenda {
+public class SaleItem {
 	private long livro_id;
 	private long venda_id;
 	private int quantidade;

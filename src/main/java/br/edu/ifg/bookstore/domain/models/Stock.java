@@ -1,4 +1,4 @@
-package br.edu.ifg.livraria.domain.models;
+package br.edu.ifg.bookstore.domain.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,16 +9,15 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+@Entity
 @Getter
 @Setter
-@Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-
-public class Venda {
-	@EqualsAndHashCode.Include
+public class Stock {
 	@Id
+	@EqualsAndHashCode.Include
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private long user_id;
-	private double total;
+	private int quantidade;
+	private long livros_id;
 }

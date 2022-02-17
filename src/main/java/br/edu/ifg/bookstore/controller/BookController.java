@@ -1,4 +1,4 @@
-package br.edu.ifg.livraria.controller;
+package br.edu.ifg.bookstore.controller;
 
 import java.util.List;
 
@@ -15,34 +15,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.ifg.livraria.domain.models.Livro;
-import br.edu.ifg.livraria.repositories.LivroRepository;
+import br.edu.ifg.bookstore.domain.models.Book;
+import br.edu.ifg.bookstore.repositories.BookRepository;
 
 
 @RestController
 @RequestMapping("/livros")
-public class LivroController {
+public class BookController {
 	@Autowired
-	private LivroRepository livroRepository;
+	private BookRepository livroRepository;
 	
 	@GetMapping
-	public List<Livro> list() {
+	public List<Book> list() {
 		return livroRepository.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	public Livro show(@PathVariable Long id) {
+	public Book show(@PathVariable Long id) {
 		return livroRepository.findById(id).orElse(null);
 	}
 	
 	@PostMapping
-	public Livro create(@RequestBody Livro livro) {
+	public Book create(@RequestBody Book livro) {
 		return livroRepository.save(livro);
 	}
 	
 	@PutMapping("/{id}")
-	public Livro update(@PathVariable Long id, @RequestBody Livro livro) {
-		Livro findBook = livroRepository.findById(id).orElse(null);
+	public Book update(@PathVariable Long id, @RequestBody Book livro) {
+		Book findBook = livroRepository.findById(id).orElse(null);
 		
 		if(findBook != null) {
 			BeanUtils.copyProperties(livro, findBook, "id");
@@ -54,7 +54,7 @@ public class LivroController {
 	@DeleteMapping("/{id}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
-		Livro findBook = livroRepository.findById(id).orElse(null);
+		Book findBook = livroRepository.findById(id).orElse(null);
 		
 		if(findBook != null) {
 			livroRepository.delete(findBook);

@@ -1,4 +1,4 @@
-package br.edu.ifg.livraria.controller;
+package br.edu.ifg.bookstore.controller;
 
 import javax.websocket.server.PathParam;
 

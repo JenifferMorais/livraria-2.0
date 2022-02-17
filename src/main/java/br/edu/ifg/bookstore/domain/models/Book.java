@@ -1,4 +1,4 @@
-package br.edu.ifg.livraria.domain.models;
+package br.edu.ifg.bookstore.domain.models;
 
 import java.math.BigDecimal;
 
@@ -16,7 +16,7 @@ import lombok.Setter;
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 //Pojo - minha classe com meus atributos e métodos acessores
-public class Livro {
+public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //Especifica um valor que é gerado. Strategy: estrategia de como o valor será criado
 	@EqualsAndHashCode.Include
