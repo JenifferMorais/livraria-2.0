@@ -20,13 +20,13 @@ import br.edu.ifg.bookstore.repositories.CheckOutRepository;
 
 @RestController
 @RequestMapping("/checkout")
-public class CheckOut {
+public class CheckOutController {
 	@Autowired
 	private CheckOutRepository checkOutRepository;
 	
 	
 	@GetMapping
-	public List<Sale> list(Sale venda){
+	public List<Sale> list(Sale sale){
 		return checkOutRepository.findAll();
 	}
 	
@@ -36,19 +36,19 @@ public class CheckOut {
 	}
 	
 	@PutMapping("/{id}")
-	public Sale update(@PathVariable Long id, @RequestBody Sale venda ) {
+	public Sale update(@PathVariable Long id, @RequestBody Sale sale ) {
 		Sale findVenda = checkOutRepository.findById(id).orElse(null);
 		
 		if(findVenda!=null) {
-			BeanUtils.copyProperties(venda, findVenda, "id");
+			BeanUtils.copyProperties(sale, findVenda, "id");
 			return checkOutRepository.save(findVenda);
 		}
 		return null;
 	}
 	
 	@PostMapping
-	public Sale create(@RequestBody Sale venda) {
-		return checkOutRepository.save(venda);
+	public Sale create(@RequestBody Sale sale) {
+		return checkOutRepository.save(sale);
 	}
 	
 	@DeleteMapping("/{id}")

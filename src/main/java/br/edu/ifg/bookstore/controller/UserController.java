@@ -19,34 +19,35 @@ import br.edu.ifg.bookstore.domain.models.User;
 import br.edu.ifg.bookstore.repositories.UserRepository;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/users")
 public class UserController {
+	
 	@Autowired
-	private UserRepository usuarioRepository;
+	private UserRepository userRepository;
 	
 	@GetMapping
 	public List<User> list(){
-		return usuarioRepository.findAll();
+		return userRepository.findAll();
 	}
 	
 	@GetMapping("/{id}")
 	public User show(@PathVariable Long id) {
-		return usuarioRepository.findById(id).orElse(null);
+		return userRepository.findById(id).orElse(null);
 	}
 	
 	@PostMapping
-	public User create(@RequestBody User usuario) {
-		return usuarioRepository.save(usuario);
+	public User create(@RequestBody User user) {
+		return userRepository.save(user);
 	}
 	
 	
 	@PutMapping("/{id}")
-	public User update(@PathVariable Long id, @RequestBody User usuario) {
-		User findUser = usuarioRepository.findById(id).orElse(null);
+	public User update(@PathVariable Long id, @RequestBody User user) {
+		User findUser = userRepository.findById(id).orElse(null);
 		
 		if(findUser!=null) {
-			BeanUtils.copyProperties(usuario, findUser, "id");
-			return usuarioRepository.save(findUser);
+			BeanUtils.copyProperties(user, findUser, "id");
+			return userRepository.save(findUser);
 		}
 		return null;
 	}
@@ -55,10 +56,10 @@ public class UserController {
 	@DeleteMapping("/{id}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
-		User findUser = usuarioRepository.findById(id).orElse(null);
+		User findUser = userRepository.findById(id).orElse(null);
 		
 		if(findUser!=null) {
-			usuarioRepository.delete(findUser);
+			userRepository.delete(findUser);
 		}
 	}
 }

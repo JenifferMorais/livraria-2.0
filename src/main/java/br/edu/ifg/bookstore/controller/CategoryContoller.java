@@ -15,51 +15,52 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.ifg.bookstore.domain.models.Book;
-import br.edu.ifg.bookstore.repositories.BookRepository;
-
+import br.edu.ifg.bookstore.domain.models.Category;
+import br.edu.ifg.bookstore.repositories.CategoryRepository;
 
 @RestController
-@RequestMapping("/books")
-public class BookController {
+@RequestMapping("/category")
+public class CategoryContoller {
+
 	@Autowired
-	private BookRepository bookRepository;
-	
+	private CategoryRepository categoryRepository;
+
 	@GetMapping
-	public List<Book> list() {
-		return bookRepository.findAll();
+	public List<Category> list() {
+		return categoryRepository.findAll();
 	}
-	
+
 	@GetMapping("/{id}")
-	public Book show(@PathVariable Long id) {
-		return bookRepository.findById(id).orElse(null);
+	public Category show(@PathVariable Long id) {
+		return categoryRepository.findById(id).orElse(null);
 	}
-	
+
 	@PostMapping
-	public Book create(@RequestBody Book book) {
-		return bookRepository.save(book);
+	public Category create(@RequestBody Category category) {
+		return categoryRepository.save(category);
 	}
-	
+
 	@PutMapping("/{id}")
-	public Book update(@PathVariable Long id, @RequestBody Book book) {
-		Book findBook = bookRepository.findById(id).orElse(null);
-		
-		if(findBook != null) {
-			BeanUtils.copyProperties(book, findBook, "id");
-			return bookRepository.save(findBook);
+	public Category update(@PathVariable Long id, @RequestBody Category category) {
+
+		Category findCategory = categoryRepository.findById(id).orElse(null);
+
+		if (findCategory != null) {
+			BeanUtils.copyProperties(category, findCategory, "id");
+			return categoryRepository.save(findCategory);
 		}
-		return null;	
+		return null;
+
 	}
-	
+
 	@DeleteMapping("/{id}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
-		Book findBook = bookRepository.findById(id).orElse(null);
+		Category findCategory = categoryRepository.findById(id).orElse(null);
 		
-		if(findBook != null) {
-			bookRepository.delete(findBook);
+		if(findCategory != null) {
+			categoryRepository.delete(findCategory);
 		}
-		
 	}
-	
+
 }
