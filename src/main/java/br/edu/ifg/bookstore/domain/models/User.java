@@ -1,10 +1,15 @@
 package br.edu.ifg.bookstore.domain.models;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -26,5 +31,8 @@ public class User {
 	private String password;
 	private boolean admin;
 	private String imagem;
+	@OneToMany
+	@JsonIgnoreProperties("user")
+	private Set<Sale> sale;
 
 }
